@@ -1,0 +1,25 @@
+<html>
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="grafico"></div>
+    <script>
+        // Esta función lee los datos que le mandes desde el mapa de ArcGIS
+        const urlParams = new URLSearchParams(window.location.search);
+        const nombre = urlParams.get('nombre');
+        const valores = JSON.parse(urlParams.get('datos')); // Recibe los datos de las columnas
+        const fechas = JSON.parse(urlParams.get('fechas'));
+
+        var data = [{
+            x: fechas,
+            y: valores,
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: nombre
+        }];
+
+        Plotly.newPlot('grafico', data, {title: 'Serie Temporal: ' + nombre});
+    </script>
+</body>
+</html>
